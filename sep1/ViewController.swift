@@ -33,6 +33,12 @@ class ViewController: UIViewController {
         Avatar.clipsToBounds = true
         nameValue.text = (person?.firstName)! + " " + (person?.lastName)!
         emailValue.text = person?.email
+        streetValue.text = person?.street
+        cityValue.text = person?.city
+        zipValue.text = person?.zip
+        stateValue.text = person?.state
+        phoneValue.text = person?.phone
+        cellValue.text = person?.cell
     }
 
     override func didReceiveMemoryWarning() {
