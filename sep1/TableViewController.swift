@@ -203,10 +203,34 @@ class TableViewController: UITableViewController {
                                             
                                         }
                                     }
+                                    //Location
+                                    if let location = field["location"] as? [String : AnyObject]{
+                                        //street
+                                        if let street = location["street"] as? String{
+                                            person.street = street;
+                                        }
+                                        if let city = location["city"] as? String{
+                                            person.city = city;
+                                        }
+                                        if let state = location["state"] as? String{
+                                            person.state = state;
+                                        }
+                                        if let postcode = location["postcode"] as? String{
+                                            person.postcode = postcode;
+                                        }
+                                    }
                                     //Email
                                     if let email = field["email"] as? String{
                                         print(email);
                                         person.email = email;
+                                    }
+                                    //Phone
+                                    if let phone = field["phone"] as? String{
+                                        person.phone = phone;
+                                    }
+                                    //Cell
+                                    if let cell = field["cell"] as? String{
+                                        person.cell = cell;
                                     }
                                     
                                 }

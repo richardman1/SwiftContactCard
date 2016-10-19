@@ -16,7 +16,7 @@ class Person {
     var email : String?
     var street : String?
     var city : String?
-    var zip : String?
+    var postcode : String?
     var state : String?
     var phone : String?
     var cell : String?

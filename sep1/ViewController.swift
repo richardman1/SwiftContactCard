@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         emailValue.text = person?.email
         streetValue.text = person?.street
         cityValue.text = person?.city
-        zipValue.text = person?.zip
+        zipValue.text = person?.postcode
         stateValue.text = person?.state
         phoneValue.text = person?.phone
         cellValue.text = person?.cell
