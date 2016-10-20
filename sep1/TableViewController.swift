@@ -182,24 +182,20 @@ class TableViewController: UITableViewController {
                                 for field in json["results"] as? [AnyObject] ?? []{
                                     //Gender
                                     if let gender = field["gender"] as? String {
-                                        print(gender)
                                         
                                     }
                                     //Full name
                                     if let fullName = field["name"] as? [String : AnyObject]{
                                         //Title
                                         if let title = fullName["title"] as? String{
-                                            print(title)
                                         }
                                         //First name
                                         if let firstName = fullName["first"] as? String{
-                                            print(firstName);
                                             person.firstName = firstName;
                                         }
                                         //Last name
                                         if let lastName = fullName["last"] as? String{
                                             person.lastName = lastName;
-                                            print(lastName);
                                             
                                         }
                                     }
@@ -214,9 +210,6 @@ class TableViewController: UITableViewController {
                                         }
                                         if let state = location["state"] as? String{
                                             person.state = state;
-                                        }
-                                        if let postcode = location["postcode"] as? String{
-                                            person.postcode = postcode;
                                         }
                                     }
                                     //Email

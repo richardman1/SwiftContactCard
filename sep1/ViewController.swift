@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var nameValue: UILabel!
     @IBOutlet weak var streetValue: UILabel!
     @IBOutlet weak var cityValue: UILabel!
-    @IBOutlet weak var zipValue: UILabel!
     @IBOutlet weak var stateValue: UILabel!
     @IBOutlet weak var phoneValue: UILabel!
     @IBOutlet weak var cellValue: UILabel!
@@ -35,7 +34,6 @@ class ViewController: UIViewController {
         emailValue.text = person?.email
         streetValue.text = person?.street
         cityValue.text = person?.city
-        zipValue.text = person?.postcode
         stateValue.text = person?.state
         phoneValue.text = person?.phone
         cellValue.text = person?.cell
