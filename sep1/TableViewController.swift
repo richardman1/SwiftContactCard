@@ -14,122 +14,32 @@ class TableViewController: UITableViewController {
     // Lege array
     var persons: [Person] = []
     
-    func fillArrayWithDummyData() {
-        // Maak een paar personen en append to array
-//        let p1 = Person(firstName: "Marshall", lastName: "Fuller", imageString: "94");
-//        persons.append(p1)
-//        let p2 = Person(firstName: "Lilja", lastName: "Lehtinen", imageString: "56");
-//        persons.append(p2)
-//        let p3 = Person(firstName: "Jeanette", lastName: "James", imageString: "87");
-//        persons.append(p3)
-    }
-    
-//    func fillArrayWithDataFromREST(){
-//        let connection = RestApiManager.sharedInstance
-//        DispatchQueue.main.async{            
-//            var person :Person
-//            person = connection.getRestPerson(tableview: self.tableView)
-//            print("personemail : \(person.firstName)")
-//            self.persons.append(person)
-//            self.tableView.reloadData()
-//        }
-//    }
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
+        // Connect to db
         
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
-        self.getRestPerson()
+        let restService = RestApiManager.sharedInstance
+        
+        //Collect new person from server
+        //CLOSURE METHODE
+        restService.getRestPerson( onCompletion: {(person: Person?) -> Void in
+            
+            if(person != nil){
+                let database = DataBaseHelper.sharedInstance
+//                database.create(firstname: (person?.firstName!)!, lastname: (person?.lastName!)!, imageUrl: (person?.image!)!, email: (person?.email!)!, address: (person?.street!)!, city: (person?.city!)!, state: (person?.state!)!, phone: (person?.phone!)!, cell: (person?.cell!)!)
+//                
+                self.persons.append(person!)
+                // Reload the tableview
+                self.tableView.reloadData()
+            }
+            
+
+            print("REFRESHED INSIDE ONCOMPLETE")
+        });
+        print("REFRESHED OUTSIDE")
+
         
         //self.fillArrayWithDummyData()
 
@@ -159,7 +69,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "personCell", for: indexPath) as! PersonTableViewCell
-
+        
          //Configure the cell...
         let row = persons[indexPath.row]
         cell.firstName?.text = row.firstName
@@ -178,8 +88,6 @@ class TableViewController: UITableViewController {
                 break;
             }
         }
-
-
         return cell
     }
     
@@ -195,6 +103,7 @@ class TableViewController: UITableViewController {
                             if let json = response.result.value as? Dictionary<String, Any>{
                                 //                                print("json: \(json)")
                                 for field in json["results"] as? [AnyObject] ?? []{
+                                    
                                     //Gender
                                     if let gender = field["gender"] as? String {
                                         person.gender = gender
@@ -205,6 +114,7 @@ class TableViewController: UITableViewController {
                                         if let title = fullName["title"] as? String{
                                             person.title = title
                                         }
+                                    
                                         //First name
                                         if let firstName = fullName["first"] as? String{
                                             person.firstName = firstName;
