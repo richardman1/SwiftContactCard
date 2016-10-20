@@ -17,6 +17,9 @@
 		72658E431D81697E006CFCF2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72658E421D81697E006CFCF2 /* TableViewController.swift */; };
 		72658E451D8169F6006CFCF2 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72658E441D8169F6006CFCF2 /* Person.swift */; };
 		72658E471D817945006CFCF2 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72658E461D817945006CFCF2 /* PersonTableViewCell.swift */; };
+		8C52DA4D1DB8E15C0049E41C /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C52DA4C1DB8E15C0049E41C /* DatabaseHelper.swift */; };
+		8C52DA4F1DB8E5690049E41C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C52DA4E1DB8E5690049E41C /* libsqlite3.0.tbd */; settings = {ATTRIBUTES = (Required, ); }; };
+		8C52DA521DB8EC840049E41C /* ContactCard.db in Resources */ = {isa = PBXBuildFile; fileRef = 8C52DA511DB8EC840049E41C /* ContactCard.db */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,10 @@
 		72658E421D81697E006CFCF2 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		72658E441D8169F6006CFCF2 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		72658E461D817945006CFCF2 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonTableViewCell.swift; path = ../PersonTableViewCell.swift; sourceTree = "<group>"; };
+		8C52DA4C1DB8E15C0049E41C /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
+		8C52DA4E1DB8E5690049E41C /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		8C52DA501DB8E6060049E41C /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		8C52DA511DB8EC840049E41C /* ContactCard.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = ContactCard.db; sourceTree = "<group>"; };
 		93675F8A93793A06DBBD309D /* Pods-sep1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sep1.release.xcconfig"; path = "Pods/Target Support Files/Pods-sep1/Pods-sep1.release.xcconfig"; sourceTree = "<group>"; };
 		B8E58426E20C420B22D575F8 /* Pods-sep1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sep1.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sep1/Pods-sep1.debug.xcconfig"; sourceTree = "<group>"; };
 		F0B755D09CB3E7B7CEA99928 /* Pods_sep1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sep1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C52DA4F1DB8E5690049E41C /* libsqlite3.0.tbd in Frameworks */,
 				125C3BEB8E30C9E930DCE6C6 /* Pods_sep1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +77,7 @@
 		721E5D9D1D78130100C7CBDD /* sep1 */ = {
 			isa = PBXGroup;
 			children = (
+				8C52DA511DB8EC840049E41C /* ContactCard.db */,
 				72658E461D817945006CFCF2 /* PersonTableViewCell.swift */,
 				721E5D9E1D78130100C7CBDD /* AppDelegate.swift */,
 				721E5DA01D78130100C7CBDD /* ViewController.swift */,
@@ -79,6 +88,8 @@
 				72658E441D8169F6006CFCF2 /* Person.swift */,
 				72658E421D81697E006CFCF2 /* TableViewController.swift */,
 				72542C5F1D93F65400C9FF51 /* RestApiManager.swift */,
+				8C52DA4C1DB8E15C0049E41C /* DatabaseHelper.swift */,
+				8C52DA501DB8E6060049E41C /* Bridging-Header.h */,
 			);
 			path = sep1;
 			sourceTree = "<group>";
@@ -95,6 +106,7 @@
 		C19217CE15C5664502D30121 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C52DA4E1DB8E5690049E41C /* libsqlite3.0.tbd */,
 				F0B755D09CB3E7B7CEA99928 /* Pods_sep1.framework */,
 			);
 			name = Frameworks;
@@ -135,7 +147,7 @@
 				TargetAttributes = {
 					721E5D9A1D78130100C7CBDD = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 32C47P5297;
+						DevelopmentTeam = PQ2KC6ZRAM;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -163,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C52DA521DB8EC840049E41C /* ContactCard.db in Resources */,
 				721E5DA91D78130100C7CBDD /* LaunchScreen.storyboard in Resources */,
 				721E5DA61D78130100C7CBDD /* Assets.xcassets in Resources */,
 				721E5DA41D78130100C7CBDD /* Main.storyboard in Resources */,
@@ -227,6 +240,7 @@
 				721E5DA11D78130100C7CBDD /* ViewController.swift in Sources */,
 				72658E431D81697E006CFCF2 /* TableViewController.swift in Sources */,
 				72542C601D93F65400C9FF51 /* RestApiManager.swift in Sources */,
+				8C52DA4D1DB8E15C0049E41C /* DatabaseHelper.swift in Sources */,
 				72658E451D8169F6006CFCF2 /* Person.swift in Sources */,
 				72658E471D817945006CFCF2 /* PersonTableViewCell.swift in Sources */,
 				721E5D9F1D78130100C7CBDD /* AppDelegate.swift in Sources */,
@@ -349,11 +363,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 32C47P5297;
+				DEVELOPMENT_TEAM = PQ2KC6ZRAM;
 				INFOPLIST_FILE = sep1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sep1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "sep1/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -364,11 +379,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 32C47P5297;
+				DEVELOPMENT_TEAM = PQ2KC6ZRAM;
 				INFOPLIST_FILE = sep1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sep1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "sep1/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

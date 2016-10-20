@@ -7,4 +7,5 @@ target 'sep1' do
 
   # Pods for sep1
     pod 'Alamofire', '~> 4.0'
+    pod 'GRDB.swift'
 end

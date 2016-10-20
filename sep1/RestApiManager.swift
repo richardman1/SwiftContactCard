@@ -15,9 +15,9 @@ class RestApiManager: NSObject {
     static let sharedInstance = RestApiManager()
     
         let url : String = "https://randomuser.me/api/"
+        let database = DataBaseHelper.sharedInstance
     
-    
-    func getRestPerson(tableview:UITableView) -> Person {
+    func getRestPerson(onCompletion: @escaping (Person?) -> Void) {
         let person = Person()
        
         //var personemail = ""
@@ -25,29 +25,32 @@ class RestApiManager: NSObject {
                           method: .get,
                           encoding: URLEncoding.default).responseJSON { response in
                             if let json = response.result.value as? Dictionary<String, Any>{
-//                                print("json: \(json)")
+                                //                                print("json: \(json)")
                                 for field in json["results"] as? [AnyObject] ?? []{
-                                    //Gender
-                                    if let gender = field["gender"] as? String {
-                                        print(gender)
-                                        
-                                    }
+                                    
                                     //Full name
                                     if let fullName = field["name"] as? [String : AnyObject]{
-                                        //Title
-                                        if let title = fullName["title"] as? String{
-                                            print(title)
-                                        }
                                         //First name
                                         if let firstName = fullName["first"] as? String{
-                                            print(firstName);
                                             person.firstName = firstName;
                                         }
                                         //Last name
                                         if let lastName = fullName["last"] as? String{
                                             person.lastName = lastName;
-                                            print(lastName);
                                             
+                                        }
+                                    }
+                                    //Location
+                                    if let location = field["location"] as? [String : AnyObject]{
+                                        //street
+                                        if let street = location["street"] as? String{
+                                            person.street = street;
+                                        }
+                                        if let city = location["city"] as? String{
+                                            person.city = city;
+                                        }
+                                        if let state = location["state"] as? String{
+                                            person.state = state;
                                         }
                                     }
                                     //Email
@@ -55,12 +58,30 @@ class RestApiManager: NSObject {
                                         print(email);
                                         person.email = email;
                                     }
-
+                                    //Phone
+                                    if let phone = field["phone"] as? String{
+                                        person.phone = phone;
                                     }
+                                    //Cell
+                                    if let cell = field["cell"] as? String{
+                                        person.cell = cell;
+                                    }
+                                    //Image
+                                    if let image = field["image"] as? [String : AnyObject]{
+                                        if let large = image["large"] as? String{
+                                            person.image = large;
+                                        }
+                                    }
+                                    
                                 }
+                                
+                                onCompletion(person)
+                                
+                                
                             }
     
-        return person
-}
+        
+        }
+    }
 }
 
