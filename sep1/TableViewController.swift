@@ -161,9 +161,24 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "personCell", for: indexPath) as! PersonTableViewCell
 
          //Configure the cell...
-        let row = indexPath.row
-        cell.firstName?.text = persons[row].firstName
-        cell.lastName?.text = persons[row].lastName
+        let row = persons[indexPath.row]
+        cell.firstName?.text = row.firstName
+        cell.lastName?.text = row.lastName
+        
+        //Set cell image
+        Alamofire.request(row.mediumImg!, method: .get).responseData{ (response : DataResponse<Data>)
+            in
+            switch(response.result){
+            case .success(_):
+                let image = UIImage(data: response.result.value!)
+                cell.imageThumbnail.image = image
+                break;
+                
+            case .failure(_):
+                break;
+            }
+        }
+
 
         return cell
     }
@@ -182,12 +197,13 @@ class TableViewController: UITableViewController {
                                 for field in json["results"] as? [AnyObject] ?? []{
                                     //Gender
                                     if let gender = field["gender"] as? String {
-                                        
+                                        person.gender = gender
                                     }
                                     //Full name
                                     if let fullName = field["name"] as? [String : AnyObject]{
                                         //Title
                                         if let title = fullName["title"] as? String{
+                                            person.title = title
                                         }
                                         //First name
                                         if let firstName = fullName["first"] as? String{
@@ -224,6 +240,23 @@ class TableViewController: UITableViewController {
                                     //Cell
                                     if let cell = field["cell"] as? String{
                                         person.cell = cell;
+                                    }
+                                    
+                                    //Picture
+                                    if let location = field["picture"] as? [String : AnyObject]{
+                                        //Large
+                                        if let large = location["large"] as? String{
+                                            person.largeImg = large
+                                        }
+                                        //Medium
+                                        if let medium = location["medium"] as? String{
+                                            person.mediumImg = medium
+                                        }
+                                        
+                                        //Thumbnail
+                                        if let thumbnail = location["thumbnail"] as? String{
+                                            person.thumbnailImg = thumbnail
+                                        }
                                     }
                                     
                                 }

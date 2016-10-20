@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
 
@@ -38,6 +39,27 @@ class ViewController: UIViewController {
         phoneValue.text = person?.phone
         cellValue.text = person?.cell
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        Avatar.image = nil;
+        
+        let imageUrl = person!.largeImg
+        
+        // Set cell image
+        Alamofire.request(imageUrl!, method: .get).responseData { (response: DataResponse<Data>) in
+            switch(response.result) {
+                
+            case .success(_):
+                let image = UIImage(data: response.result.value!)
+                self.Avatar.image = image
+                break;
+                
+            case .failure(_):
+                break;
+            }
+        }
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

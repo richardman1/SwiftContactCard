@@ -19,6 +19,11 @@ class Person {
     var state : String?
     var phone : String?
     var cell : String?
+    var largeImg : String?
+    var mediumImg : String?
+    var thumbnailImg : String?
+    var gender : String?
+    var title : String?
     
     required init()
     {

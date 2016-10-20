@@ -15,6 +15,7 @@ class PersonTableViewCell: UITableViewCell {
     
     @IBOutlet internal var lastName: UILabel!
     
+    @IBOutlet weak var imageThumbnail: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         
