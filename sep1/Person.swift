@@ -12,7 +12,6 @@ import UIKit
 class Person {
     var firstName : String?
     var lastName: String?
-    var image: String?
     var email : String?
     var street : String?
     var city : String?

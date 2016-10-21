@@ -47,12 +47,19 @@ class DataBaseHelper: NSObject {
     func create(firstname: String, lastname: String, imageUrl:String, email:String, address:String, city:String,
                 state:String, phone:String, cell:String) {
         
-        let query = "INSERT INTO person (FirstName, LastName, ImageUrl, Email, Address, City, State, Phone, Cell) VALUES (?, ?,?,?,?,?,?,?,?)"
+        let query = "INSERT INTO person (FirstName, LastName, ImageUrl, Email, Address, City, State, Phone, Cell) VALUES (?,?,?,?,?,?,?,?,?)"
         
         var statement : OpaquePointer? = nil
         if sqlite3_prepare(db, query, -1, &statement, nil) == SQLITE_OK {
             sqlite3_bind_text(statement, 1, firstname, -1, nil);
             sqlite3_bind_text(statement, 2, lastname, -1, nil);
+            sqlite3_bind_text(statement, 3, imageUrl, -1, nil);
+            sqlite3_bind_text(statement, 4, email, -1, nil);
+            sqlite3_bind_text(statement, 5, address, -1, nil);
+            sqlite3_bind_text(statement, 6, city, -1, nil);
+            sqlite3_bind_text(statement, 7, state, -1, nil);
+            sqlite3_bind_text(statement, 8, phone, -1, nil);
+            sqlite3_bind_text(statement, 9, cell, -1, nil);
             
             if sqlite3_step(statement) != SQLITE_DONE {
                 print("Error inserting row")
@@ -89,7 +96,7 @@ class DataBaseHelper: NSObject {
             let person = Person();
             person.firstName = String(cString: sqlite3_column_text(statement, 1));
             person.lastName = String(cString: sqlite3_column_text(statement, 2));
-            person.image = String(cString: sqlite3_column_text(statement, 3));
+            person.largeImg = String(cString: sqlite3_column_text(statement, 3));
             person.email = String(cString: sqlite3_column_text(statement, 4));
             person.street = String(cString: sqlite3_column_text(statement, 5));
             person.city = String(cString: sqlite3_column_text(statement, 6));

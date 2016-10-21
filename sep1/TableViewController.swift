@@ -28,8 +28,8 @@ class TableViewController: UITableViewController {
             
             if(person != nil){
                 let database = DataBaseHelper.sharedInstance
-//                database.create(firstname: (person?.firstName!)!, lastname: (person?.lastName!)!, imageUrl: (person?.image!)!, email: (person?.email!)!, address: (person?.street!)!, city: (person?.city!)!, state: (person?.state!)!, phone: (person?.phone!)!, cell: (person?.cell!)!)
-//                
+                database.create(firstname: (person?.firstName!)!, lastname: (person?.lastName!)!, imageUrl: (person?.largeImg!)!, email: (person?.email!)!, address: (person?.street!)!, city: (person?.city!)!, state: (person?.state!)!, phone: (person?.phone!)!, cell: (person?.cell!)!)
+                
                 self.persons.append(person!)
                 // Reload the tableview
                 self.tableView.reloadData()
@@ -90,97 +90,6 @@ class TableViewController: UITableViewController {
         }
         return cell
     }
-    
-    func getRestPerson() {
-        let person = Person()
-        
-        //var personemail = ""
-        let url : String = "https://randomuser.me/api/"
-
-        Alamofire.request(url,
-                          method: .get,
-                          encoding: URLEncoding.default).responseJSON { response in
-                            if let json = response.result.value as? Dictionary<String, Any>{
-                                //                                print("json: \(json)")
-                                for field in json["results"] as? [AnyObject] ?? []{
-                                    
-                                    //Gender
-                                    if let gender = field["gender"] as? String {
-                                        person.gender = gender
-                                    }
-                                    //Full name
-                                    if let fullName = field["name"] as? [String : AnyObject]{
-                                        //Title
-                                        if let title = fullName["title"] as? String{
-                                            person.title = title
-                                        }
-                                    
-                                        //First name
-                                        if let firstName = fullName["first"] as? String{
-                                            person.firstName = firstName;
-                                        }
-                                        //Last name
-                                        if let lastName = fullName["last"] as? String{
-                                            person.lastName = lastName;
-                                            
-                                        }
-                                    }
-                                    //Location
-                                    if let location = field["location"] as? [String : AnyObject]{
-                                        //street
-                                        if let street = location["street"] as? String{
-                                            person.street = street;
-                                        }
-                                        if let city = location["city"] as? String{
-                                            person.city = city;
-                                        }
-                                        if let state = location["state"] as? String{
-                                            person.state = state;
-                                        }
-                                    }
-                                    //Email
-                                    if let email = field["email"] as? String{
-                                        print(email);
-                                        person.email = email;
-                                    }
-                                    //Phone
-                                    if let phone = field["phone"] as? String{
-                                        person.phone = phone;
-                                    }
-                                    //Cell
-                                    if let cell = field["cell"] as? String{
-                                        person.cell = cell;
-                                    }
-                                    
-                                    //Picture
-                                    if let location = field["picture"] as? [String : AnyObject]{
-                                        //Large
-                                        if let large = location["large"] as? String{
-                                            person.largeImg = large
-                                        }
-                                        //Medium
-                                        if let medium = location["medium"] as? String{
-                                            person.mediumImg = medium
-                                        }
-                                        
-                                        //Thumbnail
-                                        if let thumbnail = location["thumbnail"] as? String{
-                                            person.thumbnailImg = thumbnail
-                                        }
-                                    }
-                                    
-                                }
-                                
-                                self.persons.append(person)
-                                self.tableView.reloadData()
-                            
-                            }
-        }
-        
-    }
-
-
-
 
     /*
     // Override to support conditional editing of the table view.
