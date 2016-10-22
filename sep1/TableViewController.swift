@@ -22,24 +22,27 @@ class TableViewController: UITableViewController {
         
         let restService = RestApiManager.sharedInstance
         
+        
+        for _ in 0..<20{
+            restService.getRestPerson( onCompletion: {(person: Person?) -> Void in
+                
+                if(person != nil){
+                    let database = DataBaseHelper.sharedInstance
+                    database.create(firstname: (person?.firstName!)!, lastname: (person?.lastName!)!, imageUrl: (person?.largeImg!)!, email: (person?.email!)!, address: (person?.street!)!, city: (person?.city!)!, state: (person?.state!)!, phone: (person?.phone!)!, cell: (person?.cell!)!)
+                    
+                    self.persons.append(person!)
+                    // Reload the tableview
+                    self.tableView.reloadData()
+                }
+                
+                
+                print("REFRESHED INSIDE ONCOMPLETE")
+            });
+
+        }
         //Collect new person from server
         //CLOSURE METHODE
-        restService.getRestPerson( onCompletion: {(person: Person?) -> Void in
-            
-            if(person != nil){
-                let database = DataBaseHelper.sharedInstance
-                database.create(firstname: (person?.firstName!)!, lastname: (person?.lastName!)!, imageUrl: (person?.largeImg!)!, email: (person?.email!)!, address: (person?.street!)!, city: (person?.city!)!, state: (person?.state!)!, phone: (person?.phone!)!, cell: (person?.cell!)!)
-                
-                self.persons.append(person!)
-                // Reload the tableview
-                self.tableView.reloadData()
-            }
-            
-
-            print("REFRESHED INSIDE ONCOMPLETE")
-        });
-        print("REFRESHED OUTSIDE")
-
+                print("REFRESHED OUTSIDE")
         
         //self.fillArrayWithDummyData()
 
